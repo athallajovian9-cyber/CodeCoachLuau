@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+tools/
+# per-machine stuck state
+codecoach_luau_state.json
+kidcode/
