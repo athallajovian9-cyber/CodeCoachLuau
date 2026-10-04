@@ -48,6 +48,10 @@ def main() -> int:
     ap.add_argument("--watch", action="store_true", help="report again on every save")
     ap.add_argument("--run", action="store_true",
                     help="also execute it. Refused for scripts that use Roblox APIs")
+    ap.add_argument("--kid", action="store_true", default=True,
+                    help="use kid-friendly language (default: True)")
+    ap.add_argument("--parent", dest="kid", action="store_false",
+                    help="use parent mode language")
     ap.add_argument("--interval", type=float, default=1.0)
     args = ap.parse_args()
 
@@ -68,16 +72,16 @@ def main() -> int:
         if target.is_dir():
             checks = [engine.examine(p, now=now, run=args.run)
                       for p in find_scripts(target)]
-            print(RP.summary(checks, now))
+            print(RP.summary(checks, now, kid_mode=args.kid))
             worst = 0
             for check, rec in checks:
                 if not check.clean:
-                    print(RP.render(check, rec, now))
+                    print(RP.render(check, rec, now, kid_mode=args.kid))
                     worst = 1
             return worst
 
         check, rec = engine.examine(target, now=now, run=args.run)
-        print(RP.render(check, rec, now))
+        print(RP.render(check, rec, now, kid_mode=args.kid))
         return 0 if check.clean else 1
 
     if args.watch:
