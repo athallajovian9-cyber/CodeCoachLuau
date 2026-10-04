@@ -124,6 +124,19 @@ class CodeCoachLuauApp(tk.Tk):
         )
         path_lbl.pack(side=tk.LEFT, padx=15)
 
+        discord_btn = tk.Button(
+            footer,
+            text="💎 Join Discord (First 100 Badge)",
+            font=("Segoe UI", 9, "bold"),
+            bg="#5865F2",
+            fg="white",
+            relief=tk.FLAT,
+            cursor="hand2",
+            command=lambda: __import__("webbrowser").open("https://discord.gg/QtyBucygQ6"),
+            padx=8,
+        )
+        discord_btn.pack(side=tk.RIGHT, padx=6, pady=4)
+
         recheck_btn = tk.Button(
             footer,
             text="🔄 Re-check Now",
